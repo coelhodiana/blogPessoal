@@ -19,6 +19,25 @@
             <li class="nav-item">
                 <a class="nav-link p-3 texto" routerLink='/feed'>Feed</a>
             </li>
+            <div *ngIf='auth.btnLogin()'>
+                <li class="nav-item">
+                    <a class="nav-link p-3 texto" routerLink='/login'>Entrar</a>
+                </li>
+            </div>
+
+            <div *ngIf='auth.btnLogin()'>
+                <li class="nav-item">
+                    <a class="nav-link p-3 texto" routerLink='/register'>Cadastre-se</a>
+                </li>
+            </div>
+
+            <div *ngIf='auth.btnLogout()'>
+                <li class="nav-item">
+                    <a class="nav-link p-3 texto" (click)='logout()'>Sair</a>
+                </li>
+            </div>
+
+
         </ul>
     </div>
 </nav>
