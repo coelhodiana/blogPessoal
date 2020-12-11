@@ -1,85 +1,94 @@
 <div class="container py-5">
-    <div class="row w-100">
-        <!-- Card perfil -->
-        <div class="col-md-4">
-            <app-perfil-lateral></app-perfil-lateral>
+  <div class="row w-100">
+    <!-- Card perfil -->
+    <div class="col-md-4">
+      <app-perfil-lateral></app-perfil-lateral>
+    </div>
+    <!-- Card perfil -->
+
+    <!-- Forms -->
+    <div class="col-md-8">
+      <div class="row w-100 d-flex flex-column justify-content-center">
+        <h3>Publique um artigo:</h3>
+        <div class="form-group">
+          <label for="title">Título:</label>
+          <input type="text" class="form-control" placeholder="Digite aqui o seu titulo" [(ngModel)]='article.title'>
         </div>
-        <!-- Card perfil -->
 
-        <!-- Forms -->
-        <div class="col-md-8">
-            <div class="row w-100 d-flex flex-column justify-content-center">
-                <h3>Publique um artigo:</h3>
-                <div class="form-group">
-                    <label for="titulo">Título:</label>
-                    <input type="text" class="form-control" placeholder="Digite aqui o seu titulo">
-                </div>
+        <div class="form-group">
+          <label for="article">Artigo:</label>
+          <textarea class="form-control" rows="3" placeholder="Digite aqui o seu texto"
+            [(ngModel)]='article.article'></textarea>
+          <small class="text-danger">*Digite no minimo 10 caracteres</small>
+        </div>
+      </div>
 
-                <div class="form-group">
-                    <label for="texto">Texto:</label>
-                    <textarea class="form-control" rows="3" placeholder="Digite aqui o seu texto"></textarea>
-                    <small class="text-danger">*Digite no minimo 10 caracteres</small>
-                </div>
-            </div>
+      <div class="row w-100 my-5 d-flex align-items-end justify-content-center">
+        <div class="w-100">
+          <div class="form-group">
+            <label for="topic">Escolha um tema ou <a href="">Cadastre um novo</a></label>
+            <select name="topic" id='topic' class="form-control" [(ngModel)]='idTopic' (change)='findByIdTopic()'>
+              <option *ngFor='let item of listTopics' value={{item.id}}>
+                {{item.description}}
+              </option>
+            </select>
+            <button type="button" class="btn btn-outline-info" (click)='publish()'>Publicar</button>
+          </div>
+        </div>
+        <div class="w-100">
+        </div>
+      </div>
 
-            <div class="row w-100 my-5 d-flex align-items-end justify-content-center">
-                <div class="w-100">
-                    <div class="form-group">
-                        <label for="tema">Escolha um tema ou <a href="">Cadastre um novo</a></label>
-                        <select name="tema" id='tema' class="form-control">
-                            <option>
-                                Teste 123
-                            </option>
-                        </select>
-                    </div>
-                </div>
+      <hr class="my-5 w-100">
 
-                <div class="w-100">
-                    <button type="button" class="btn btn-outline-info">Publicar</button>
-                </div>
-            </div>
+      <!-- nav -->
+      <nav class="d-flex justify-content-start">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-home-tab" data-toggle="tab"
+            href="#minhas-postagens" role="tab" aria-controls="nav-home" aria-selected="true">Minhas Postagens</a>
 
-            <hr class="my-5 w-100">
+          <a class="nav-item nav-link text-secondary font-weight-bold" id="nav-profile-tab" data-toggle="tab"
+            href="#postagens-temas" role="tab" aria-controls="nav-profile" aria-selected="false">Postagens por tema</a>
+        </div>
+      </nav>
+      <!-- nav -->
 
-            <!-- nav -->
-            <nav class="d-flex justify-content-start">
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-home-tab" data-toggle="tab" href="#minhas-postagens"
-                      role="tab" aria-controls="nav-home" aria-selected="true">Minhas Postagens</a>
-          
-                    <a class="nav-item nav-link text-secondary font-weight-bold" id="nav-profile-tab" data-toggle="tab" href="#postagens-temas" role="tab"
-                      aria-controls="nav-profile" aria-selected="false">Postagens por tema</a>
-                  </div>
-            </nav>
-            <!-- nav -->
-
-            <div class="tab-content" id="nav-tabContent">
-
-                <div class="tab-pane fade show active" id="minhas-postagens" role="tabpanel" aria-labelledby="nav-postagens-tab">
-                  <div class="row my-5">
-                    <div class="col-md-10 pr-0">
-                      <input class="form-control w-100" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
-                    </div>
-                    <div class="col-md-2 pl-0">
-                      <button class="btn btn-outline-warning w-100" type="button">Pesquisar</button>
-                    </div>
-                  </div>
-                </div>
-        
-                <div class="tab-pane fade" id="postagens-temas" role="tabpanel" aria-labelledby="nav-presenca-tab">
-                  <div class="row my-5">
-                    <div class="col-md-10 pr-0">
-                      <input class="form-control w-100" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
-                    </div>
-                    <div class="col-md-2 pl-0">
-                      <button class="btn btn-outline-warning w-100" type="button">Pesquisar</button>
-                    </div>
-                  </div>
+      <div class="container bg-dark">
+        <div class="tab-content" id="nav-tabContent">
+  
+          <div class="tab-pane fade show active" id="minhas-postagens" role="tabpanel"
+            aria-labelledby="nav-postagens-tab">
+            <div class="row my-5">
+              <div class="col-md-10 pr-0 form-inline">
+                <input class="form-control w-75" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
+                <button class="btn btn-outline-warning w-25" type="button">Pesquisar</button>
+              </div>
+  
+              <div class="bg-light py-5 w-100">
+                <div class="row">
+  
                 </div>
               </div>
-
+  
+            </div>
+          </div>
+  
+          <div class="tab-pane fade" id="postagens-temas" role="tabpanel" aria-labelledby="nav-presenca-tab">
+            <div class="row my-5">
+              <div class="col-md-10 pr-0 form-inline">
+                <input class="form-control w-75" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
+                <button class="btn btn-outline-info w-25" type="button">Pesquisar</button>
+              </div>
+            </div>
+  
+          </div>
         </div>
-        <!-- Forms -->
+
+      </div>
+
+
     </div>
+    <!-- Forms -->
+  </div>
 
 </div>
