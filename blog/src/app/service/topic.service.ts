@@ -26,4 +26,8 @@ export class TopicService {
     return this.http.get<Topic>(`http://localhost:9000/topic/name/${name}`, this.token)
   }
 
+  postTopic(topic: Topic): Observable<Topic> {
+    return this.http.post<Topic>('http://localhost:9000/topic', topic, this.token)
+  }
+
 }

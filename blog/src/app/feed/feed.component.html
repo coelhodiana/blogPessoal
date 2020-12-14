@@ -26,7 +26,7 @@
       <div class="row w-100 my-5 d-flex align-items-end justify-content-center">
         <div class="w-100">
           <div class="form-group">
-            <label for="topic">Escolha um tema ou <a href="">Cadastre um novo</a></label>
+            <label for="topic">Escolha um tema ou <a [routerLink]="['/post-tema']">Cadastre um novo</a></label>
             <select name="topic" id='topic' class="form-control" [(ngModel)]='idTopic' (change)='findByIdTopic()'>
               <option *ngFor='let item of listTopics' value={{item.id}}>
                 {{item.description}}
@@ -39,52 +39,118 @@
         </div>
       </div>
 
-      <hr class="my-5 w-100">
+      <hr class="row my-5 w-100">
 
-      <!-- nav -->
-      <nav class="d-flex justify-content-start">
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-home-tab" data-toggle="tab"
-            href="#minhas-postagens" role="tab" aria-controls="nav-home" aria-selected="true">Minhas Postagens</a>
-
-          <a class="nav-item nav-link text-secondary font-weight-bold" id="nav-profile-tab" data-toggle="tab"
-            href="#postagens-temas" role="tab" aria-controls="nav-profile" aria-selected="false">Postagens por tema</a>
-        </div>
-      </nav>
-      <!-- nav -->
-
-      <div class="container bg-dark">
-        <div class="tab-content" id="nav-tabContent">
+      <!-- tabs -->
+      <div class="row w-100">
+        <!-- nav -->
+        <nav class="d-flex justify-content-start w-100">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-home-tab" data-toggle="tab"
+              href="#minhas-postagens" role="tab" aria-controls="nav-home" aria-selected="true">Minhas Publicações</a>
   
-          <div class="tab-pane fade show active" id="minhas-postagens" role="tabpanel"
+            <a class="nav-item nav-link text-secondary font-weight-bold" id="nav-profile-tab" data-toggle="tab"
+              href="#postagens-temas" role="tab" aria-controls="nav-profile" aria-selected="false">Publicações por tema</a>
+          </div>
+        </nav>
+        <!-- nav -->
+  
+        <!-- ngFor -->
+  
+        <div class="tab-content w-100" id="nav-tabContent">
+  
+          <div class="tab-pane fade show active w-100" id="minhas-postagens" role="tabpanel"
             aria-labelledby="nav-postagens-tab">
-            <div class="row my-5">
-              <div class="col-md-10 pr-0 form-inline">
-                <input class="form-control w-75" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
-                <button class="btn btn-outline-warning w-25" type="button">Pesquisar</button>
+            <div class="row mt-3 mb-3">
+              <div class="col-md-10 pr-0">
+                <input class="form-control w-100" type="search" placeholder="Pesquisar publicação" aria-label="Pesquisar"
+                  >
               </div>
+              <div class="col-md-2 pl-0">
+                <button class="btn btn-outline-warning w-100" type="button">Pesquisar</button>
+              </div>
+            </div>
   
-              <div class="bg-light py-5 w-100">
-                <div class="row">
+            <div class="row">
+              <div class="col-md-12">
   
+                <div class="card mt-5 mb-5" *ngFor="let item of listArticles">
+                  <div class="card-header">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-md-8">
+                        <h5 class="card-title"> {{item.title}} </h5>
+                        <small>Tema: {{item.topic.description}} </small>
+                      </div>
+                      <div class="col-md-4 d-flex justify-content-end">
+  
+                        <button class="mr-3 btn btn-outline-info">
+                          Editar
+                        </button>
+  
+                        <button class="btn btn-outline-danger ml-3">
+                          Apagar
+                        </button>
+  
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="card-body">
+                    <p class="card-text" aria-describedby="texto"> {{item.article}} </p>
+                    <small id="texto" class="form-text m-0 text-muted mb-3">
+                      Postado em {{item.date | date: 'dd/MM/yyyy'}} às {{item.date | date:'HH:mm'}}</small>
+                  </div>
                 </div>
               </div>
-  
             </div>
           </div>
   
+  
+  
+  
           <div class="tab-pane fade" id="postagens-temas" role="tabpanel" aria-labelledby="nav-presenca-tab">
-            <div class="row my-5">
-              <div class="col-md-10 pr-0 form-inline">
-                <input class="form-control w-75" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar">
-                <button class="btn btn-outline-info w-25" type="button">Pesquisar</button>
+  
+            <div class="row mt-3 mb-3">
+              <div class="col-md-10 pr-0">
+                <input class="form-control w-100" type="search" placeholder="Pesquisar postagem" aria-label="Pesquisar"
+                  >
+              </div>
+              <div class="col-md-2 pl-0">
+                <button class="btn btn-outline-warning w-100" type="button" >Pesquisar</button>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md-12" *ngFor="let item of listTopics">
+                <div *ngFor='let post of item.article'>
+  
+                  <div class="card mt-5 mb-5">
+                    <div class="card-header">
+                      <div class="row d-flex align-items-center">
+                        <div class="col-md-12">
+                          <h5 class="card-title"> {{post.title}} </h5>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="card-body">
+                      <p class="card-text" aria-describedby="texto"> {{post.article}} </p>
+                      <small id="texto" class="form-text m-0 text-muted mb-3">
+                        Postado em {{post.date | date: 'dd/MM/yyyy'}} às {{post.date | date:'HH:mm'}}</small>
+                    </div>
+  
+                  </div>
+                </div>
               </div>
             </div>
   
           </div>
         </div>
+        <!-- ngFor -->
 
       </div>
+      <!-- tabs -->
+
 
 
     </div>

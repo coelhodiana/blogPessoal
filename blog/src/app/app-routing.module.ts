@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FeedComponent } from './feed/feed.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PostTemaComponent } from './post-tema/post-tema.component';
 import { RegisterComponent } from './register/register.component';
 
 
@@ -11,7 +12,9 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'feed', component: FeedComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'post-tema', component: PostTemaComponent}
+
 ];
 
 @NgModule({

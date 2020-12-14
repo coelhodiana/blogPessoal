@@ -1,5 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Article } from '../model/Article';
 import { Topic } from '../model/Topic';
 import { ArticleService } from '../service/article.service';

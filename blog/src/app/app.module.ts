@@ -13,6 +13,7 @@ import { FeedComponent } from './feed/feed.component';
 import { PerfilLateralComponent } from './perfil-lateral/perfil-lateral.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PostTemaComponent } from './post-tema/post-tema.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RegisterComponent } from './register/register.component';
     PerfilLateralComponent,
     LoginComponent,
     RegisterComponent,
+    PostTemaComponent,
   ],
   imports: [
     BrowserModule,
