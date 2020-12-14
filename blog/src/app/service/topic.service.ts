@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Topic } from '../model/Topic';
+import { Article } from '../model/Article';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class TopicService {
   postTopic(topic: Topic): Observable<Topic> {
     return this.http.post<Topic>('http://localhost:9000/topic', topic, this.token)
   }
+
+  putTopic(topic: Topic): Observable<Topic> {
+    return this.http.put<Topic>('http://localhost:9000/topic', topic, this.token)
+  }
+
 
 }
